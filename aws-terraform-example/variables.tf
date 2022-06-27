@@ -19,11 +19,21 @@ variable "secret_key" {
 }
 
 variable "region" {
-  type      = true
+  type      = string
   sensitive = true
 
   validation {
     condition     = var.region != null
     error_message = "The region has not been specified on the variables"
+  }
+}
+
+variable "origin_id" {
+  type = string
+  sensitive = true
+
+  validation {
+    condition     = var.origin_id != null
+    error_message = "The origin id has not been specified on the variables"
   }
 }
