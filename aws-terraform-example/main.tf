@@ -36,7 +36,7 @@ resource "aws_cloudfront_distribution" "cloudfront_frontend" {
 
   origin {
     domain_name = aws_s3_bucket.frontend_build.bucket_domain_name
-    domain_id   = var.origin_id
+    origin_id   = var.origin_id
 
     s3_origin_config {
       origin_access_identity = aws_cloudfront_origin_access_identity.frontend_oai.cloudfront_access_identity_path
@@ -44,7 +44,10 @@ resource "aws_cloudfront_distribution" "cloudfront_frontend" {
   }
 
   restrictions {
-    restriction_type = "none"
+    geo_restriction {
+      restriction_type = "none"
+    }
+
   }
 
 
@@ -71,7 +74,11 @@ resource "aws_cloudfront_distribution" "cloudfront_frontend" {
     min_ttl                = 0
     default_ttl            = 3600
     max_ttl                = 86400
-    path_pattern           = "*"
 
   }
+
+  viewer_certificate {
+    cloudfront_default_certificate = true
+  }
+
 }
