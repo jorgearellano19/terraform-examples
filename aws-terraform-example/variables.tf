@@ -37,3 +37,13 @@ variable "origin_id" {
     error_message = "The origin id has not been specified on the variables"
   }
 }
+
+var "project_name" {
+  type = "string"
+  sensitive = true
+}
+
+var "stage_name" {
+  type = "string"
+  sensitive = true
+}
