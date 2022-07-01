@@ -28,22 +28,13 @@ variable "region" {
   }
 }
 
-variable "origin_id" {
+variable "project_name" {
   type = string
   sensitive = true
-
-  validation {
-    condition     = var.origin_id != null
-    error_message = "The origin id has not been specified on the variables"
-  }
 }
 
-var "project_name" {
-  type = "string"
+variable "stage_name" {
+  type = string
   sensitive = true
-}
-
-var "stage_name" {
-  type = "string"
-  sensitive = true
+  default = "dev"
 }
