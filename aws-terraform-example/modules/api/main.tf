@@ -1,5 +1,5 @@
 resource "aws_apigatewayv2_api" "api" {
-  name          = "example-http-api"
+  name          = format("%s-api", var.composite_name)
   protocol_type = "HTTP"
   description   = "Api Gateway description example"
   cors_configuration {
@@ -31,3 +31,5 @@ resource "aws_apigatewayv2_stage" "api_stage" {
   api_id = aws_apigatewayv2_api.api.id
   name   = var.stage_name
 }
+
+//TODO: Cognito and DB 
