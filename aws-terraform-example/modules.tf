@@ -6,5 +6,9 @@ module "app" {
 
 module "api" {
   source = "./modules/api"
+  composite_name = local.composite_name
   composite_name_upper = local.composite_name_upper
+  stage_name = var.stage_name
+  project_name = var.project_name
+  aws_region = var.region
 }
