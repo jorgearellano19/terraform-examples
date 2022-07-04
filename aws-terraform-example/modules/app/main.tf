@@ -11,6 +11,17 @@ resource "aws_s3_bucket_acl" "frontend_build_acl" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_policy" "frontend_build_bucket_policy" {
+  bucket = aws_s3_bucket.frontend_build.id
+  policy = data.aws_iam_policy_document.s3_policy.json
+}
+
+resource "aws_s3_bucket_public_access_block" "frontend_build_publick_access_block" {
+  bucket = aws_s3_bucket.frontend_build.id
+  block_public_acls       = true
+  block_public_policy     = true
+}
+
 resource "aws_cloudfront_origin_access_identity" "frontend_oai" {
   comment = "OAI for private bucket."
 }
@@ -19,7 +30,7 @@ resource "aws_cloudfront_distribution" "cloudfront_frontend" {
 
   enabled         = true
   is_ipv6_enabled = true
-
+  default_root_object = "index.html" 
   origin {
     domain_name = aws_s3_bucket.frontend_build.bucket_domain_name
     origin_id   = var.client_cdn_origin_id
