@@ -130,6 +130,7 @@ output "db_pwd" {
   depends_on = [
     aws_db_instance.psql_db
   ]
+  sensitive = true
 }
 
 output "api_gateway_id" {
